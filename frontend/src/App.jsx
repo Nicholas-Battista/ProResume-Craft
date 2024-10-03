@@ -1,30 +1,44 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import GeneralInfo from "./components/GeneralInfo";
+import Education from "./components/Education";
+import Experience from "./components/Experience";
 
 function App() {
-  // state to hold the resume data
   const [resumeData, setResumeData] = useState({
-    GeneralInfo: {},
-    education: [],
-    experience: [],
+    generalInfo: {},
+    education: {},
+    experience: {},
   });
 
-  // update functions for each state
-  const updateGeneralInfo = (info) => {
-    setResumeData((prevState) => ({
-      ...prevState,
-      GeneralInfo: info,
+  const handleGeneralInfoSubmit = (generalInfo) => {
+    setResumeData((prevData) => ({
+      ...prevData,
+      generalInfo,
+    }));
+  };
+
+  const handleEducationSubmit = (education) => {
+    setResumeData((prevData) => ({
+      ...prevData,
+      education,
+    }));
+  };
+
+  const handleExperienceSubmit = (experience) => {
+    setResumeData((prevData) => ({
+      ...prevData,
+      experience,
     }));
   };
 
   return (
-    <div className="App">
+    <div>
       <h1>ProResume Craft</h1>
-      <GeneralInfo onSubmit={updateGeneralInfo} />
-      {/* <Education onSubmit={updateEducation} />
-      <Experience onSubmit={updateExperience} />
-      <ResumePreview data={resumeData} /> */}
+      <GeneralInfo onSubmit={handleGeneralInfoSubmit} />
+      <Education onSubmit={handleEducationSubmit} />
+      <Experience onSubmit={handleExperienceSubmit} />
     </div>
   );
 }
+
 export default App;
