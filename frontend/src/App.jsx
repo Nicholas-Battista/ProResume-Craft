@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import GeneralInfo from "./components/GeneralInfo";
 import Education from "./components/Education";
 import Experience from "./components/Experience";
+import ResumePreview from "./components/ResumePreview";
 
 function App() {
   const [resumeData, setResumeData] = useState({
@@ -37,6 +38,7 @@ function App() {
       <GeneralInfo onSubmit={handleGeneralInfoSubmit} />
       <Education onSubmit={handleEducationSubmit} />
       <Experience onSubmit={handleExperienceSubmit} />
+      <ResumePreview data={resumeData} />
     </div>
   );
 }
