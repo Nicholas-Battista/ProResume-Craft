@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Education({ onSubmit }) {
+function Education({ onChange }) {
   const [education, setEducation] = useState({
     school: "",
     degree: "",
@@ -9,21 +9,17 @@ function Education({ onSubmit }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setEducation((prevEducation) => ({
-      ...prevEducation,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(education);
+    setEducation((prevEducation) => {
+      const updatedEducation = { ...prevEducation, [name]: value };
+      onChange(updatedEducation);
+      return updatedEducation;
+    });
   };
 
   return (
     <div>
       <h2>Education</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
         <input
           type="text"
           name="school"
@@ -44,7 +40,6 @@ function Education({ onSubmit }) {
           value={education.date}
           onChange={handleChange}
         />
-        <button type="submit">Submit</button>
       </form>
     </div>
   );

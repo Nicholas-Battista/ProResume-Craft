@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function GeneralInfo({ onSubmit }) {
+function GeneralInfo({ onChange }) {
   const [info, setInfo] = useState({
     name: "",
     email: "",
@@ -9,21 +9,17 @@ function GeneralInfo({ onSubmit }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setInfo((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(info);
+    setInfo((prevInfo) => {
+      const updatedInfo = { ...prevInfo, [name]: value };
+      onChange(updatedInfo);
+      return updatedInfo;
+    });
   };
 
   return (
     <div>
       <h2>General Information</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
         <input
           type="text"
           name="name"
@@ -45,7 +41,6 @@ function GeneralInfo({ onSubmit }) {
           value={info.phone}
           onChange={handleChange}
         />
-        <button type="submit">Submit</button>
       </form>
     </div>
   );

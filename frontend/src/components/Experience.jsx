@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function Experience({ onSubmit }) {
+function Experience({ onChange }) {
   const [experience, setExperience] = useState({
     company: "",
     position: "",
@@ -11,21 +11,17 @@ function Experience({ onSubmit }) {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setExperience((prevExperience) => ({
-      ...prevExperience,
-      [name]: value,
-    }));
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(experience);
+    setExperience((prevExperience) => {
+      const updatedExperience = { ...prevExperience, [name]: value };
+      onChange(updatedExperience); // Call onChange to update the parent state in real-time
+      return updatedExperience;
+    });
   };
 
   return (
     <div>
       <h2>Experience</h2>
-      <form onSubmit={handleSubmit}>
+      <form>
         <input
           type="text"
           name="company"
@@ -60,7 +56,6 @@ function Experience({ onSubmit }) {
           value={experience.toDate}
           onChange={handleChange}
         />
-        <button type="submit">Submit</button>
       </form>
     </div>
   );

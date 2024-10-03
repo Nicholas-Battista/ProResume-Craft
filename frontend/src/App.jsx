@@ -11,21 +11,21 @@ function App() {
     experience: {},
   });
 
-  const handleGeneralInfoSubmit = (generalInfo) => {
+  const handleGeneralInfoChange = (generalInfo) => {
     setResumeData((prevData) => ({
       ...prevData,
       generalInfo,
     }));
   };
 
-  const handleEducationSubmit = (education) => {
+  const handleEducationChange = (education) => {
     setResumeData((prevData) => ({
       ...prevData,
       education,
     }));
   };
 
-  const handleExperienceSubmit = (experience) => {
+  const handleExperienceChange = (experience) => {
     setResumeData((prevData) => ({
       ...prevData,
       experience,
@@ -35,9 +35,9 @@ function App() {
   return (
     <div>
       <h1>ProResume Craft</h1>
-      <GeneralInfo onSubmit={handleGeneralInfoSubmit} />
-      <Education onSubmit={handleEducationSubmit} />
-      <Experience onSubmit={handleExperienceSubmit} />
+      <GeneralInfo onChange={handleGeneralInfoChange} />
+      <Education onChange={handleEducationChange} />
+      <Experience onChange={handleExperienceChange} />
       <ResumePreview data={resumeData} />
     </div>
   );
